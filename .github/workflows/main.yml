@@ -1,0 +1,52 @@
+name: AppSec Pipeline
+
+on:
+  push:
+    branches: ["main"]
+  pull_request: 
+    branches: ["main"]
+
+jobs:
+  security-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/chechout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distrubution: 'temurin'
+          java-version: '17'
+
+      - name: Build project
+        run: mvn clean install -DskipTests
+
+      # Semgrep SAST
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: "p/java"
+        env:
+          SEMGREP_APP_TOKEN: ${{0db51cbc587e0a3b46a9c01d43af2034f2dc2d561d845132d6827cde40d79a73}}
+
+      - name: Run OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: "spring-boot-app"
+          path: "."
+          format: "HTML"
+          args: >
+            --failOnCVSS 7
+          env:
+            JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17/x64
+
+      - name: Upload Dependency-Check Report
+        uses: actions/upload-artifect@v4
+        with:
+          name: dependency-check-report
+          path: reports
+            
+          
+          
