@@ -41,37 +41,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-starter</artifactId>
-    	</dependency>
-
-    	<!-- Vulnerable Log4j -->
-    	<dependency>
-        	<groupId>org.apache.logging.log4j</groupId>
-        	<artifactId>log4j-core</artifactId>
-        	<version>2.14.1</version>
-    	</dependency>
-
-    	<!-- Vulnerable Jackson -->
-    	<dependency>
-        	<groupId>com.fasterxml.jackson.core</groupId>
-        	<artifactId>jackson-databind</artifactId>
-        	<version>2.9.8</version>
-    	</dependency>
-
-    	<!-- Vulnerable Commons Collections -->
-    	<dependency>
-        	<groupId>commons-collections</groupId>
-        	<artifactId>commons-collections</artifactId>
-        	<version>3.2.1</version>
-    	</dependency>
-
-    	<dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-starter-test</artifactId>
-        	<scope>test</scope>
-    	</dependency>
 	</dependencies>
 
 	<build>
